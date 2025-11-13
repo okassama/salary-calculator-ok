@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docker:build": "docker build -t salary-calculator .",
+    "docker:run": "docker run -p 7770:7770 salary-calculator",
+    "docker:compose": "docker-compose up --build"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",
