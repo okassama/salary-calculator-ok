@@ -22,6 +22,8 @@ A comprehensive UK salary calculator built with React and TypeScript that provid
 
 ## Getting Started
 
+### Development (Local)
+
 1. Install dependencies:
    ```bash
    npm install
@@ -33,6 +35,42 @@ A comprehensive UK salary calculator built with React and TypeScript that provid
    ```
 
 3. Open your browser and navigate to the local development URL.
+
+### Docker Deployment
+
+The application can be easily deployed using Docker on port 7770.
+
+#### Prerequisites
+- Docker installed on your system
+- Docker Compose (optional, for easier deployment)
+
+#### Using Docker Compose (Recommended)
+```bash
+# Build and start the container
+npm run docker:compose
+
+# Or directly with docker-compose
+docker-compose up --build
+```
+
+#### Using Docker Commands
+```bash
+# Build the Docker image
+npm run docker:build
+
+# Run the container
+npm run docker:run
+
+# Or directly with Docker
+docker build -t salary-calculator .
+docker run -p 7770:7770 salary-calculator
+```
+
+#### Access the Application
+Once running, open your browser and navigate to:
+```
+http://localhost:7770
+```
 
 ## Usage
 
