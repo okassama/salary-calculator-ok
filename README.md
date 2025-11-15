@@ -1,6 +1,6 @@
 # Salary & Budget Pro
 
-![Salary & Budget Pro](/public/screenshots/screenshot-1.png)
+![Salary & Budget Pro](https://github.com/okassama/salary-calculator-ok/blob/main/public/screenshots/screenshot-1.png?raw=true)
 
 An all-in-one financial planning tool designed to give you a clear and comprehensive breakdown of your salary and monthly budget. Built with React, TypeScript, and Tailwind CSS, this application provides a detailed analysis of your take-home pay and helps you manage your outgoings effectively.
 
@@ -31,11 +31,11 @@ An all-in-one financial planning tool designed to give you a clear and comprehen
 
 ### Salary Breakdown
 
-![Salary Breakdown](/public/screenshots/screenshot-1.png)
+![Salary Breakdown](https://github.com/okassama/salary-calculator-ok/blob/main/public/screenshots/screenshot-1.png?raw=true)
 
 ### Monthly Budget Planner
 
-![Monthly Budget Planner](/public/screenshots/screenshot-2.png)
+![Monthly Budget Planner](https://github.com/okassama/salary-calculator-ok/blob/main/public/screenshots/screenshot-2.png?raw=true)
 
 ## Tech Stack
 
