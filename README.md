@@ -114,6 +114,18 @@ docker build -t salary-calculator .
 docker run -p 7770:7770 salary-calculator
 ```
 
+#### Portainer (Stack)
+
+You can also deploy this application using Portainer as a stack.
+
+1.  **Log in to your Portainer instance.**
+2.  **Go to "Stacks" and click "Add stack".**
+3.  **Give the stack a name (e.g., `salary-calculator`).**
+4.  **Select "Git Repository" as the build method.**
+5.  **Enter the repository URL:** `https://github.com/okassama/salary-calculator-ok.git`
+6.  **Set the Compose path to:** `docker-compose.yml`
+7.  **Click "Deploy the stack".**
+
 #### Access the Application
 Once running, open your browser and navigate to:
 ```
