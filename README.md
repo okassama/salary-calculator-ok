@@ -1,6 +1,6 @@
 # Salary & Budget Pro
 
-![Salary & Budget Pro](https://raw.githubusercontent.com/okassama/salary-calculator-ok/main/public/screenshots/screenshot-1.png)
+![Salary & Budget Pro](public/screenshots/screenshot-1.png)
 
 An all-in-one financial planning tool designed to give you a clear and comprehensive breakdown of your salary and monthly budget. Built with React, TypeScript, and Tailwind CSS, this application provides a detailed analysis of your take-home pay and helps you manage your outgoings effectively.
 
@@ -12,7 +12,11 @@ An all-in-one financial planning tool designed to give you a clear and comprehen
 - **Comprehensive Salary Breakdown:** Get a detailed view of your yearly, monthly, and weekly take-home pay.
 - **Accurate Tax Calculations:** Supports both **UK (England, Wales, NI)** and **Scottish** tax bands for the 2024/2025 tax year.
 - **National Insurance & Pension:** Includes accurate NI deductions and allows you to add your pension contributions.
-- **Student Loan Support:** Calculates deductions for Plan 1, Plan 2, Plan 4, and Postgraduate loans.
+- **Student Loan Support:** Calculates deductions for:
+  - **Plan 1:** For students who started their course before 1 September 2012.
+  - **Plan 2:** For students who started their course between 1 September 2012 and 31 July 2023.
+  - **Plan 4:** For Scottish students.
+  - **Postgraduate Loan:** For postgraduate courses.
 - **Monthly Budget Planner:** A side-by-side layout to manage your outgoings, including categories like:
   - Rent/Mortgage
   - Council Tax
@@ -27,11 +31,11 @@ An all-in-one financial planning tool designed to give you a clear and comprehen
 
 ### Salary Breakdown
 
-![Salary Breakdown](https://raw.githubusercontent.com/okassama/salary-calculator-ok/main/public/screenshots/screenshot-1.png)
+![Salary Breakdown](public/screenshots/screenshot-1.png)
 
 ### Monthly Budget Planner
 
-![Monthly Budget Planner](https://raw.githubusercontent.com/okassama/salary-calculator-ok/main/public/screenshots/screenshot-2.png)
+![Monthly Budget Planner](public/screenshots/screenshot-2.png)
 
 ## Tech Stack
 
@@ -40,7 +44,7 @@ An all-in-one financial planning tool designed to give you a clear and comprehen
 - **Charts:** Recharts
 - **Icons:** Lucide React
 - **Build Tool:** Vite
-- **Deployment:** Firebase Hosting
+- **Deployment:** Firebase Hosting, Docker
 
 ## Getting Started
 
@@ -48,6 +52,7 @@ An all-in-one financial planning tool designed to give you a clear and comprehen
 
 - Node.js (v18 or higher)
 - npm
+- Docker (for Docker deployment)
 
 ### Development
 
@@ -71,6 +76,8 @@ An all-in-one financial planning tool designed to give you a clear and comprehen
 
 ## Deployment
 
+### Firebase
+
 This application is deployed to Firebase Hosting. To deploy your own version, you can follow these steps:
 
 1.  **Build the project:**
@@ -82,6 +89,38 @@ This application is deployed to Firebase Hosting. To deploy your own version, yo
     ```bash
     firebase deploy --only hosting
     ```
+
+### Docker
+
+The application can be easily deployed using Docker on port 7770.
+
+#### Using Docker Compose (Recommended)
+```bash
+# Build and start the container
+npm run docker:compose
+
+# Or directly with docker-compose
+docker-compose up --build
+```
+
+#### Using Docker Commands
+```bash
+# Build the Docker image
+npm run docker:build
+
+# Run the container
+npm run docker:run
+
+# Or directly with Docker
+docker build -t salary-calculator .
+docker run -p 7770:7770 salary-calculator
+```
+
+#### Access the Application
+Once running, open your browser and navigate to:
+```
+http://localhost:7770
+```
 
 ## License
 
