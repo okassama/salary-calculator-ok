@@ -72,6 +72,56 @@ const OutgoingsPlanner: React.FC<OutgoingsPlannerProps> = ({
   const secondHalf = outgoingsCategories.slice(half);
 
   const exportToWord = () => {
+    // Calculate financial ratios for insights
+    const savingsRate = (Number(outgoings['Savings/Investments']) / monthlyNet) * 100;
+    const housingRatio = (Number(outgoings['Rent/Mortgage']) / monthlyNet) * 100;
+    const hasSavings = Number(outgoings['Savings/Investments']) > 0;
+    const hasDebt = Number(outgoings['Credit Cards']) > 0;
+    const disposableIncome = remainingMonthlyNet;
+    
+    // Generate contextual insights
+    let insights = [];
+    
+    if (remainingMonthlyNet > 0) {
+      if (hasSavings) {
+        if (savingsRate >= 20) {
+          insights.push(`Excellent! You're saving ${savingsRate.toFixed(1)}% of your income, which is above the recommended 20%.`);
+        } else if (savingsRate >= 10) {
+          insights.push(`Good progress! You're saving ${savingsRate.toFixed(1)}% of your income. Consider increasing to 20% for optimal financial growth.`);
+        } else {
+          insights.push(`You're saving ${savingsRate.toFixed(1)}% of your income. Try to increase this to 15-20% for better financial security.`);
+        }
+      } else {
+        insights.push(`You have ${formatCurrency(remainingMonthlyNet)} available after expenses. Consider allocating some to savings or investments.`);
+      }
+      
+      if (hasDebt) {
+        insights.push(`You have credit card debt. Consider using some of your disposable income to pay this down faster.`);
+      }
+      
+      if (housingRatio > 30) {
+        insights.push(`Your housing costs (${housingRatio.toFixed(1)}% of income) are above the recommended 30% threshold.`);
+      }
+      
+      if (disposableIncome > 500) {
+        insights.push(`With ${formatCurrency(disposableIncome)} disposable income, you could build an emergency fund or invest for long-term goals.`);
+      } else if (disposableIncome > 200) {
+        insights.push(`Your disposable income of ${formatCurrency(disposableIncome)} provides good flexibility for unexpected expenses.`);
+      }
+    } else {
+      insights.push(`Your expenses exceed your income by ${formatCurrency(Math.abs(remainingMonthlyNet))}.`);
+      
+      if (housingRatio > 35) {
+        insights.push(`Your housing costs (${housingRatio.toFixed(1)}% of income) are significantly impacting your budget.`);
+      }
+      
+      if (hasDebt) {
+        insights.push(`Credit card payments are contributing to your budget deficit. Consider debt consolidation or payment plans.`);
+      }
+      
+      insights.push(`Review your largest expenses and consider where you can reduce spending to balance your budget.`);
+    }
+
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -97,6 +147,8 @@ const OutgoingsPlanner: React.FC<OutgoingsPlannerProps> = ({
           .outgoings-table tr:nth-child(even) { background: #f9f9f9; }
           .total-row { background: #e8f4fd !important; font-weight: bold; }
           .insights { background: #f0f9ff; padding: 15px; border-radius: 6px; border-left: 4px solid #3B82F6; margin: 20px 0; }
+          .insights-list { margin: 0; padding-left: 20px; }
+          .insights-list li { margin-bottom: 8px; }
           .footer { margin-top: 30px; text-align: center; color: #666; font-size: 12px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
         </style>
       </head>
@@ -148,12 +200,9 @@ const OutgoingsPlanner: React.FC<OutgoingsPlannerProps> = ({
 
         <div class="insights">
           <h2 class="section-title">Financial Insights</h2>
-          <p>
-            ${remainingMonthlyNet > 0 
-              ? `Great! You have ${formatCurrency(remainingMonthlyNet)} left after expenses. Consider saving or investing this amount.`
-              : `Your expenses exceed your income by ${formatCurrency(Math.abs(remainingMonthlyNet))}. Consider reviewing your budget.`
-            }
-          </p>
+          <ul class="insights-list">
+            ${insights.map(insight => `<li>${insight}</li>`).join('')}
+          </ul>
         </div>
 
         <div class="footer">
